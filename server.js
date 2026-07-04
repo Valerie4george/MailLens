@@ -23,8 +23,8 @@ app.post("/analyze", (req, res) => {
     }
 
     // Word count
-    const words = email.trim().split(" ");
-    const wordCount = words.length;
+    const words = email.trim().split(/\s+/);
+const wordCount = words.length;
 
     // Character count
     const characterCount = email.length;
@@ -32,13 +32,19 @@ app.post("/analyze", (req, res) => {
     // STEP 3: Sentence count
     const sentences = email.split(/[.!?]+/).filter(s => s.trim().length > 0);
     const sentenceCount = sentences.length;
+    // STEP 4: Paragraph count
+const paragraphs = email
+    .split(/\n\s*\n/)
+    .filter(p => p.trim().length > 0);
 
-    res.json({
-        email,
-        wordCount,
-        characterCount,
-        sentenceCount
-    });
+const paragraphCount = paragraphs.length;
+   res.json({
+    email,
+    wordCount,
+    characterCount,
+    sentenceCount,
+    paragraphCount
+});
 });
 
 app.listen(PORT, () => {
