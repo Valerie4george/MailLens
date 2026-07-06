@@ -32,18 +32,35 @@ const wordCount = words.length;
     // STEP 3: Sentence count
     const sentences = email.split(/[.!?]+/).filter(s => s.trim().length > 0);
     const sentenceCount = sentences.length;
+
     // STEP 4: Paragraph count
 const paragraphs = email
     .split(/\n\s*\n/)
     .filter(p => p.trim().length > 0);
 
 const paragraphCount = paragraphs.length;
+
+// STEP 5: Average words per sentence
+const averageWordsPerSentence =
+    sentenceCount > 0
+        ? Number((wordCount / sentenceCount).toFixed(2))
+        : 0;
+
+// STEP 6: Average words per paragraph
+const averageWordsPerParagraph =
+    paragraphCount > 0
+        ? Number((wordCount / paragraphCount).toFixed(2))
+        : 0;
+
+
    res.json({
     email,
     wordCount,
     characterCount,
     sentenceCount,
-    paragraphCount
+    paragraphCount,
+    averageWordsPerSentence,
+    averageWordsPerParagraph
 });
 });
 
