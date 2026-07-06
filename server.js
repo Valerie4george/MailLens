@@ -63,6 +63,20 @@ const hasGreeting = greetings.some(greeting =>
     firstLine.startsWith(greeting)
 );
 
+//STEP 9: Sign-off detection
+const signOffs =["thanks,", "regards,", "sincerely,", "best,"];
+const lines = email
+    .split("\n")
+    .map(line => line.trim())
+    .filter(line => line.length > 0);
+
+const emailLower = email.toLowerCase();
+
+const hasSignOff = signOffs.some(signOff =>
+    emailLower.includes(signOff)
+);
+
+
    res.json({
     email,
     wordCount,
@@ -72,7 +86,8 @@ const hasGreeting = greetings.some(greeting =>
     averageWordsPerSentence,
     averageWordsPerParagraph,
     readingTimeMinutes,
-    hasGreeting
+    hasGreeting,
+    hasSignOff
 
 });
 });
