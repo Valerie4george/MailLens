@@ -52,6 +52,16 @@ const averageWordsPerParagraph =
         ? Number((wordCount / paragraphCount).toFixed(2))
         : 0;
 
+        // STEP 7: Estimated reading time (minutes)
+const readingTimeMinutes =
+    Number((wordCount / 200).toFixed(2));
+    
+    // STEP 8: Greeting detection
+const greetings = ["hi", "hello", "dear", "hey"];
+const firstLine = email.split("\n")[0].toLowerCase();
+const hasGreeting = greetings.some(greeting =>
+    firstLine.startsWith(greeting)
+);
 
    res.json({
     email,
@@ -60,7 +70,10 @@ const averageWordsPerParagraph =
     sentenceCount,
     paragraphCount,
     averageWordsPerSentence,
-    averageWordsPerParagraph
+    averageWordsPerParagraph,
+    readingTimeMinutes,
+    hasGreeting
+
 });
 });
 
