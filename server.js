@@ -81,6 +81,9 @@ const urgencyIndicators = ["urgent", "asap", "immediately", "please respond","pr
 const isUrgent = urgencyIndicators.some(word =>
     emailLower.includes(word)
 );
+//Step 11: Question Detection
+const questions = email.match(/\?/g) || [];
+const questionCount = questions.length;
 
 
 
@@ -95,7 +98,8 @@ const isUrgent = urgencyIndicators.some(word =>
     readingTimeMinutes,
     hasGreeting,
     hasSignOff,
-    isUrgent
+    isUrgent,
+    questionCount
 
 });
 });
