@@ -93,6 +93,12 @@ const emailAddresses =
     email.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g) || [];
 
 const emailAddressCount = emailAddresses.length;
+// STEP 14: Phone number detection
+const phoneNumbers =
+    email.match(/\+?\d[\d\s-]{8,}\d/g) || [];
+
+const phoneNumberCount = phoneNumbers.length;
+
 
 
    res.json({
@@ -108,7 +114,8 @@ const emailAddressCount = emailAddresses.length;
     hasSignOff,
     isUrgent,
     questionCount,
-    emailAddressCount
+    emailAddressCount,
+    phoneNumberCount
 });
 });
 app.listen(PORT, () => {
