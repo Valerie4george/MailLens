@@ -76,6 +76,13 @@ const hasSignOff = signOffs.some(signOff =>
     emailLower.includes(signOff)
 );
 
+//Step 10: Urgency Detection
+const urgencyIndicators = ["urgent", "asap", "immediately", "please respond","priority"];
+const isUrgent = urgencyIndicators.some(word =>
+    emailLower.includes(word)
+);
+
+
 
    res.json({
     email,
@@ -87,11 +94,11 @@ const hasSignOff = signOffs.some(signOff =>
     averageWordsPerParagraph,
     readingTimeMinutes,
     hasGreeting,
-    hasSignOff
+    hasSignOff,
+    isUrgent
 
 });
 });
-
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
