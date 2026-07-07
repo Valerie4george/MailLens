@@ -88,6 +88,11 @@ const questionCount = questions.length;
 const urls = email.match(/https?:\/\/[^\s]+|www\.[^\s]+/g) || [];
 const urlCount = urls.length;
 
+// STEP 13: Email address detection
+const emailAddresses =
+    email.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g) || [];
+
+const emailAddressCount = emailAddresses.length;
 
 
    res.json({
@@ -103,9 +108,7 @@ const urlCount = urls.length;
     hasSignOff,
     isUrgent,
     questionCount,
-    urlCount
-
-
+    emailAddressCount
 });
 });
 app.listen(PORT, () => {
