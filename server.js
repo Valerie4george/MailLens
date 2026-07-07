@@ -84,6 +84,9 @@ const isUrgent = urgencyIndicators.some(word =>
 //Step 11: Question Detection
 const questions = email.match(/\?/g) || [];
 const questionCount = questions.length;
+// STEP 12: URL detection
+const urls = email.match(/https?:\/\/[^\s]+|www\.[^\s]+/g) || [];
+const urlCount = urls.length;
 
 
 
@@ -99,7 +102,9 @@ const questionCount = questions.length;
     hasGreeting,
     hasSignOff,
     isUrgent,
-    questionCount
+    questionCount,
+    urlCount
+
 
 });
 });
