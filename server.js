@@ -99,6 +99,17 @@ const phoneNumbers =
 
 const phoneNumberCount = phoneNumbers.length;
 
+// STEP 15: Attachment mention detection
+const attachmentWords = [
+    "attached",
+    "attachment",
+    "enclosed",
+    "please find attached"
+];
+const mentionsAttachment = attachmentWords.some(word =>
+    emailLower.includes(word)
+);
+
 
 
    res.json({
@@ -115,7 +126,8 @@ const phoneNumberCount = phoneNumbers.length;
     isUrgent,
     questionCount,
     emailAddressCount,
-    phoneNumberCount
+    phoneNumberCount,
+    mentionsAttachment
 });
 });
 app.listen(PORT, () => {
