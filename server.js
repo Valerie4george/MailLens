@@ -1,15 +1,15 @@
 const express = require("express");
+console.log("Analyze Controller Loaded");
 const { analyzeEmail } = require("./controllers/analyzeController");
 
 const app = express();
 
 app.use(express.json());
+app.use(express.static("public"));
+
 
 const PORT = 3000;
 
-app.get("/", (req, res) => {
-    res.send("Welcome to MailLens!");
-});
 
 app.get("/health", (req, res) => {
     res.send("MailLens server is healthy!");

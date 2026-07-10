@@ -1,5 +1,8 @@
 const analyzeEmail = (req, res) => {
+    console.log("NEW CONTROLLER IS RUNNING");
+
     const { email } = req.body;
+    
 
     if (!email) {
         return res.status(400).json({
@@ -99,24 +102,36 @@ const analyzeEmail = (req, res) => {
         emailLower.includes(word)
     );
 
-    res.json({
-        email,
+res.json({
+    email,
+
+    statistics: {
         wordCount,
         characterCount,
         sentenceCount,
         paragraphCount,
         averageWordsPerSentence,
         averageWordsPerParagraph,
-        readingTimeMinutes,
+        readingTimeMinutes
+    },
+
+    emailQuality: {
         hasGreeting,
-        hasSignOff,
+        hasSignOff
+    },
+
+    flags: {
         isUrgent,
+        mentionsAttachment
+    },
+
+    detectedInfo: {
         questionCount,
         urlCount,
         emailAddressCount,
-        phoneNumberCount,
-        mentionsAttachment
-    });
+        phoneNumberCount
+    }
+});
 };
 
 module.exports = {
