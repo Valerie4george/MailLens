@@ -1,22 +1,17 @@
 const express = require("express");
-console.log("Analyze Controller Loaded");
-const { analyzeEmail } = require("./controllers/analyzeController");
+const analyzeRoute = require("./routes/analyze");
 
 const app = express();
+const PORT = 3000;
 
+// Middleware
 app.use(express.json());
 app.use(express.static("public"));
 
+// Routes
+app.use("/analyze", analyzeRoute);
 
-const PORT = 3000;
-
-
-app.get("/health", (req, res) => {
-    res.send("MailLens server is healthy!");
-});
-
-app.post("/analyze", analyzeEmail);
-
+// Start server
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server running at http://localhost:${PORT}`);
 });
