@@ -1,8 +1,8 @@
-const analyzeEmail = (req, res) => {
-    console.log("NEW CONTROLLER IS RUNNING");
+const result = analyzeEmail(email);
 
+return res.json(result);
+const analyzeEmail = (req, res) => {
     const { email } = req.body;
-    
 
     if (!email) {
         return res.status(400).json({
@@ -10,50 +10,40 @@ const analyzeEmail = (req, res) => {
         });
     }
 
-    // Word count
-    const words = email.trim().split(/\s+/);
-    const wordCount = words.length;
-
-    // Character count
-    const characterCount = email.length;
-
-    // Sentence count
-    const sentences = email.split(/[.!?]+/).filter(s => s.trim().length > 0);
-    const sentenceCount = sentences.length;
 
     // Paragraph count
     const paragraphs = email
         .split(/\n\s*\n/)
-        .filter(p => p.trim().length > 0);
-
+        .filter(paragraph => paragraph.trim().length > 0);
     const paragraphCount = paragraphs.length;
 
-    // Average words per sentence
+    // Average words
     const averageWordsPerSentence =
         sentenceCount > 0
             ? Number((wordCount / sentenceCount).toFixed(2))
             : 0;
 
-    // Average words per paragraph
     const averageWordsPerParagraph =
         paragraphCount > 0
             ? Number((wordCount / paragraphCount).toFixed(2))
             : 0;
 
     // Reading time
-    const readingTimeMinutes =
-        Number((wordCount / 200).toFixed(2));
+    const readingTimeMinutes = Number((wordCount / 200).toFixed(2));
 
     // Greeting detection
     const greetings = ["hi", "hello", "dear", "hey"];
     const firstLine = email.split("\n")[0].toLowerCase();
+
     const hasGreeting = greetings.some(greeting =>
         firstLine.startsWith(greeting)
     );
 
+    // Lowercase email
+    const emailLower = email.toLowerCase();
+
     // Sign-off detection
     const signOffs = ["thanks", "regards", "best", "sincerely"];
-    const emailLower = email.toLowerCase();
 
     const hasSignOff = signOffs.some(signOff =>
         emailLower.includes(signOff)
@@ -72,23 +62,26 @@ const analyzeEmail = (req, res) => {
         emailLower.includes(word)
     );
 
-    // Question detection
-    const questions = email.match(/\?/g) || [];
-    const questionCount = questions.length;
+    // Questions
+    const questionCount = (email.match(/\?/g) || []).length;
 
-    // URL detection
-    const urls = email.match(/https?:\/\/[^\s]+|www\.[^\s]+/g) || [];
-    const urlCount = urls.length;
+    // URLs
+    const urlCount =
+        (email.match(/https?:\/\/[^\s]+|www\.[^\s]+/g) || []).length;
 
-    // Email address detection
-    const emailAddresses =
-        email.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g) || [];
-    const emailAddressCount = emailAddresses.length;
+    // Email addresses
+    const emailAddressCount =
+        (
+            email.match(
+                /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g
+            ) || []
+        ).length;
 
-    // Phone number detection
-    const phoneNumbers =
-        email.match(/\+?\d[\d\s-]{8,}\d/g) || [];
-    const phoneNumberCount = phoneNumbers.length;
+    // Phone numbers
+    const phoneNumberCount =
+        (
+            email.match(/\+?\d[\d\s-]{8,}\d/g) || []
+        ).length;
 
     // Attachment detection
     const attachmentWords = [
@@ -102,36 +95,36 @@ const analyzeEmail = (req, res) => {
         emailLower.includes(word)
     );
 
-res.json({
-    email,
+    res.json({
+        email,
 
-    statistics: {
-        wordCount,
-        characterCount,
-        sentenceCount,
-        paragraphCount,
-        averageWordsPerSentence,
-        averageWordsPerParagraph,
-        readingTimeMinutes
-    },
+        statistics: {
+            wordCount,
+            characterCount,
+            sentenceCount,
+            paragraphCount,
+            averageWordsPerSentence,
+            averageWordsPerParagraph,
+            readingTimeMinutes
+        },
 
-    emailQuality: {
-        hasGreeting,
-        hasSignOff
-    },
+        emailQuality: {
+            hasGreeting,
+            hasSignOff
+        },
 
-    flags: {
-        isUrgent,
-        mentionsAttachment
-    },
+        flags: {
+            isUrgent,
+            mentionsAttachment
+        },
 
-    detectedInfo: {
-        questionCount,
-        urlCount,
-        emailAddressCount,
-        phoneNumberCount
-    }
-});
+        detectedInfo: {
+            questionCount,
+            urlCount,
+            emailAddressCount,
+            phoneNumberCount
+        }
+    });
 };
 
 module.exports = {
