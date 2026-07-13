@@ -13,6 +13,7 @@ analyzeBtn.addEventListener("click", async () => {
     });
 
     const data = await response.json();
+    console.log(data);
 
     console.log("SERVER RESPONSE:", data);
 
@@ -24,5 +25,9 @@ analyzeBtn.addEventListener("click", async () => {
 <p><strong>Character Count:</strong> ${data.characterCount}</p>
 
 <p><strong>Sentence Count:</strong> ${data.sentenceCount}</p>
+
+<p><strong>Quality Score:</strong> ${data.qualityScore}/100</p>
+
+<p><strong>Test:</strong> ${data.TEST}</p>
 `;
 });
