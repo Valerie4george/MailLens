@@ -19,10 +19,34 @@ function detectGreeting(email) {
         .split("\n")[0]
         .toLowerCase();
 
-
     return greetings.some(greeting =>
         firstLine.startsWith(greeting)
     );
+}
+
+
+
+function detectSignOff(email) {
+
+    const signOffs = [
+        "thank you",
+        "thanks",
+        "regards",
+        "best regards",
+        "warm regards",
+        "sincerely",
+        "best"
+    ];
+
+    const lowerEmail = email.toLowerCase();
+
+    for (let signOff of signOffs) {
+        if (lowerEmail.includes(signOff)) {
+            return signOff;
+        }
+    }
+
+    return null;
 }
 
 
@@ -41,7 +65,6 @@ function analyzeEmail(email) {
     const sentenceCount = sentences.length;
 
 
-    // Quality score
     let score = 100;
 
 
@@ -64,14 +87,19 @@ function analyzeEmail(email) {
 
     const hasGreeting = detectGreeting(email);
 
+    const signOff = detectSignOff(email);
+
+    const hasSignOff = signOff !== null;
+
 
     return {
-        TEST: "HELLO",
         wordCount,
         characterCount,
         sentenceCount,
         qualityScore: score,
-        hasGreeting
+        hasGreeting,
+        hasSignOff,
+        signOff
     };
 }
 
