@@ -28,6 +28,8 @@ analyzeBtn.addEventListener("click", async () => {
 
 <p><strong>Quality Score:</strong> ${data.qualityScore}/100</p>
 
+<p>Greeting Detected: ${data.hasGreeting}</p>
+
 <p><strong>Test:</strong> ${data.TEST}</p>
 `;
 });

@@ -1,5 +1,32 @@
 console.log("🔥 USING NEW EMAIL ANALYZER FILE 🔥");
 
+
+function detectGreeting(email) {
+
+    const greetings = [
+        "hi",
+        "hello",
+        "hey",
+        "dear",
+        "respected",
+        "good morning",
+        "good afternoon",
+        "good evening"
+    ];
+
+    const firstLine = email
+        .trim()
+        .split("\n")[0]
+        .toLowerCase();
+
+
+    return greetings.some(greeting =>
+        firstLine.startsWith(greeting)
+    );
+}
+
+
+
 function analyzeEmail(email) {
 
     const words = email.trim().split(/\s+/);
@@ -18,13 +45,11 @@ function analyzeEmail(email) {
     let score = 100;
 
 
-    // Very short emails lose points
     if (wordCount < 10) {
         score -= 20;
     }
 
 
-    // Very long sentences lose points
     const averageWordsPerSentence = wordCount / sentenceCount;
 
     if (averageWordsPerSentence > 25) {
@@ -32,19 +57,22 @@ function analyzeEmail(email) {
     }
 
 
-    // No punctuation loses points
     if (!/[.!?]/.test(email)) {
         score -= 10;
     }
 
 
+    const hasGreeting = detectGreeting(email);
+
+
     return {
-    TEST: "HELLO",
-    wordCount,
-    characterCount,
-    sentenceCount,
-    qualityScore: score
-};
+        TEST: "HELLO",
+        wordCount,
+        characterCount,
+        sentenceCount,
+        qualityScore: score,
+        hasGreeting
+    };
 }
 
 
