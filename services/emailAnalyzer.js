@@ -49,7 +49,27 @@ function detectSignOff(email) {
     return null;
 }
 
+function detectUrgency(email) {
 
+    const urgencyWords = [
+        "urgent",
+        "asap",
+        "immediately",
+        "deadline",
+        "important",
+        "priority",
+        "action required",
+        "by tomorrow"
+    ];
+
+    const lowerEmail = email.toLowerCase();
+
+    const foundWords = urgencyWords.filter(word =>
+        lowerEmail.includes(word)
+    );
+
+    return foundWords;
+}
 
 function analyzeEmail(email) {
 
@@ -99,6 +119,10 @@ if (readingTimeMinutes < 1) {
 
     const hasSignOff = signOff !== null;
 
+    const urgencyWords = detectUrgency(email);
+
+const isUrgent = urgencyWords.length > 0;
+
 
     return {
         wordCount,
@@ -108,7 +132,9 @@ if (readingTimeMinutes < 1) {
         hasGreeting,
         hasSignOff,
         signOff,
-        readingTime
+        readingTime,
+        isUrgent,
+        urgencyWords,
     };
 }
 

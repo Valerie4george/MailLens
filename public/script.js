@@ -34,5 +34,13 @@ result.innerHTML = `
 
 <p><strong>Reading Time:</strong> ${data.readingTime}</p>
 
+<p><strong>Urgent:</strong> ${data.isUrgent ? "Yes" : "No"}</p>
+
+<p><strong>Keywords:</strong> ${
+    data.urgencyWords.length
+        ? data.urgencyWords.join(", ")
+        : "None"
+}</p>
+
 `;
 });
