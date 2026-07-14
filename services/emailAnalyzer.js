@@ -63,7 +63,15 @@ function analyzeEmail(email) {
         .filter(sentence => sentence.trim() !== "");
 
     const sentenceCount = sentences.length;
+    const readingTimeMinutes = wordCount / 200;
 
+    let readingTime;
+
+if (readingTimeMinutes < 1) {
+    readingTime = `${Math.ceil(readingTimeMinutes * 60)} sec`;
+} else {
+    readingTime = `${Math.ceil(readingTimeMinutes)} min`;
+}
 
     let score = 100;
 
@@ -99,7 +107,8 @@ function analyzeEmail(email) {
         qualityScore: score,
         hasGreeting,
         hasSignOff,
-        signOff
+        signOff,
+        readingTime
     };
 }
 

@@ -32,5 +32,7 @@ result.innerHTML = `
 
 <p>Sign-off: ${data.hasSignOff ? data.signOff : "Not detected"}</p>
 
+<p><strong>Reading Time:</strong> ${data.readingTime}</p>
+
 `;
 });
