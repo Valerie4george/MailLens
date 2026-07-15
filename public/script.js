@@ -28,11 +28,15 @@ result.innerHTML = `
 
 <p><strong>Quality Score:</strong> ${data.qualityScore}/100</p>
 
+<p><strong>Category:</strong> ${data.category}</p>
+
+<p><strong>Priority:</strong> ${data.priority}</p>
+
+<p><strong>Reading Time:</strong> ${data.readingTime}</p>
+
 <p>Greeting Detected: ${data.hasGreeting ? "Yes" : "No"}</p>
 
 <p>Sign-off: ${data.hasSignOff ? data.signOff : "Not detected"}</p>
-
-<p><strong>Reading Time:</strong> ${data.readingTime}</p>
 
 <p><strong>Urgent:</strong> ${data.isUrgent ? "Yes" : "No"}</p>
 
@@ -49,6 +53,7 @@ result.innerHTML = `
 <p><strong>Matched Phrase:</strong> ${
     data.attachmentPhrase || "None"
 }</p>
+
 
 `;
 });

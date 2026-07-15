@@ -24,8 +24,6 @@ function detectGreeting(email) {
     );
 }
 
-
-
 function detectSignOff(email) {
 
     const signOffs = [
@@ -59,7 +57,12 @@ function detectUrgency(email) {
         "important",
         "priority",
         "action required",
-        "by tomorrow"
+        "tomorrow",
+        "today",
+        "within 24 hours",
+        "due",
+        "last date",
+        "expires"
     ];
 
     const lowerEmail = email.toLowerCase();
@@ -95,6 +98,111 @@ function detectAttachment(email) {
 
     return null;
 }
+
+    function categorizeEmail(email) {
+
+    const categories = {
+        College: [
+            "assignment",
+            "exam",
+            "semester",
+            "professor",
+            "lecture",
+            "university",
+            "college",
+            "class",
+            "student",
+            "course"
+        ],
+
+        Internship: [
+            "internship",
+            "intern",
+            "stipend",
+            "recruiter",
+            "application"
+        ],
+
+        Placement: [
+            "interview",
+            "coding round",
+            "aptitude",
+            "offer",
+            "hr",
+            "placement",
+            "job"
+        ],
+
+        Personal: [
+            "birthday",
+            "party",
+            "family",
+            "vacation",
+            "dinner",
+            "friend"
+        ],
+
+        Promotion: [
+            "sale",
+            "discount",
+            "coupon",
+            "subscribe",
+            "offer",
+            "limited time"
+        ]
+    };
+
+    const lowerEmail = email.toLowerCase();
+
+    let bestCategory = "Other";
+    let highestScore = 0;
+
+    for (const category in categories) {
+
+        let score = 0;
+
+        for (const keyword of categories[category]) {
+
+            if (lowerEmail.includes(keyword)) {
+                score++;
+            }
+        }
+
+        if (score > highestScore) {
+            highestScore = score;
+            bestCategory = category;
+        }
+    }
+
+    return bestCategory;
+}
+
+
+function detectPriority(category, isUrgent) {
+
+    if (isUrgent) {
+        return "High";
+    }
+
+    if (category === "Internship") {
+        return "High";
+    }
+
+    if (category === "Placement") {
+        return "High";
+    }
+
+    if (category === "College") {
+        return "Medium";
+    }
+
+    if (category === "Promotion") {
+        return "Low";
+    }
+
+    return "Medium";
+}
+
 
 function analyzeEmail(email) {
 
@@ -137,7 +245,6 @@ if (readingTimeMinutes < 1) {
         score -= 10;
     }
 
-
     const hasGreeting = detectGreeting(email);
 
     const signOff = detectSignOff(email);
@@ -154,6 +261,10 @@ console.log("Attachment Phrase:", attachmentPhrase);
 
 const mentionsAttachment = attachmentPhrase !== null;
 
+const category = categorizeEmail(email);
+
+const priority = detectPriority(category, isUrgent);
+
 
     return {
         wordCount,
@@ -167,7 +278,9 @@ const mentionsAttachment = attachmentPhrase !== null;
         isUrgent,
         urgencyWords,
         mentionsAttachment,
-        attachmentPhrase
+        attachmentPhrase,
+        category,
+        priority
     };
 }
 
