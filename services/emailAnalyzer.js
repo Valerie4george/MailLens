@@ -71,6 +71,31 @@ function detectUrgency(email) {
     return foundWords;
 }
 
+function detectAttachment(email) {
+
+    const attachmentPhrases = [
+    "attached resume",
+    "attached document",
+    "attached file",
+    "find attached",
+    "see attached",
+    "attached cv",
+    "attachment",
+    "attached",
+    "enclosed"
+];
+
+    const lowerEmail = email.toLowerCase();
+
+    for (const phrase of attachmentPhrases) {
+        if (lowerEmail.includes(phrase)) {
+            return phrase;
+        }
+    }
+
+    return null;
+}
+
 function analyzeEmail(email) {
 
     const words = email.trim().split(/\s+/);
@@ -123,6 +148,12 @@ if (readingTimeMinutes < 1) {
 
 const isUrgent = urgencyWords.length > 0;
 
+const attachmentPhrase = detectAttachment(email);
+
+console.log("Attachment Phrase:", attachmentPhrase);
+
+const mentionsAttachment = attachmentPhrase !== null;
+
 
     return {
         wordCount,
@@ -135,6 +166,8 @@ const isUrgent = urgencyWords.length > 0;
         readingTime,
         isUrgent,
         urgencyWords,
+        mentionsAttachment,
+        attachmentPhrase
     };
 }
 

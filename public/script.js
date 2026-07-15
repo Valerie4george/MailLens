@@ -42,5 +42,13 @@ result.innerHTML = `
         : "None"
 }</p>
 
+<p><strong>Attachment Mentioned:</strong> ${
+    data.mentionsAttachment ? "Yes" : "No"
+}</p>
+
+<p><strong>Matched Phrase:</strong> ${
+    data.attachmentPhrase || "None"
+}</p>
+
 `;
 });
