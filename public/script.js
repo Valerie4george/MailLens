@@ -17,7 +17,85 @@ analyzeBtn.addEventListener("click", async () => {
 
     console.log("SERVER RESPONSE:", data);
 
+
 result.innerHTML = `
+
+<div class="result-card">
+
+<h2>📧 Analysis Result</h2>
+
+<div class="stats">
+
+<div class="card">
+<h3>📝 Words</h3>
+<p>${data.wordCount}</p>
+</div>
+
+<div class="card">
+<h3>🔤 Characters</h3>
+<p>${data.characterCount}</p>
+</div>
+
+<div class="card">
+<h3>📄 Sentences</h3>
+<p>${data.sentenceCount}</p>
+</div>
+
+<div class="card">
+<h3>⏱ Reading Time</h3>
+<p>${data.readingTime}</p>
+</div>
+
+</div>
+
+
+<div class="details">
+
+<p>
+<strong>Quality Score:</strong>
+${data.qualityScore}/100
+</p>
+
+<p>
+<strong>Category:</strong>
+${data.category}
+</p>
+
+<p>
+<strong>Priority:</strong>
+${data.priority}
+</p>
+
+<p>
+<strong>Greeting:</strong>
+${data.hasGreeting ? "Detected ✅" : "Not detected"}
+</p>
+
+<p>
+<strong>Sign-off:</strong>
+${data.hasSignOff ? data.signOff : "Not detected"}
+</p>
+
+<p>
+<strong>Urgent:</strong>
+${data.isUrgent ? "Yes 🚨" : "No"}
+</p>
+
+<p>
+<strong>Urgency Keywords:</strong>
+${data.urgencyWords.length ? data.urgencyWords.join(", ") : "None"}
+</p>
+
+<p>
+<strong>Attachment:</strong>
+${data.mentionsAttachment ? data.attachmentPhrase : "None"}
+</p>
+
+</div>
+
+</div>
+
+
 <h2>Analysis Result</h2>
 
 <p><strong>Word Count:</strong> ${data.wordCount}</p>

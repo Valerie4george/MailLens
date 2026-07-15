@@ -1,0 +1,45 @@
+.result-card {
+
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 12px;
+
+}
+
+
+.stats {
+
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+
+}
+
+
+.card {
+
+    padding: 15px;
+    border-radius: 10px;
+
+}
+
+
+.card h3 {
+
+    margin: 0;
+
+}
+
+
+.card p {
+
+    font-size: 24px;
+
+}
+
+
+.details {
+
+    margin-top: 20px;
+
+}v
