@@ -1,45 +1,149 @@
-.result-card {
-
-    margin-top: 20px;
-    padding: 20px;
-    border-radius: 12px;
-
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f9;
 }
 
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: gray;
+    margin-bottom: 30px;
+}
+
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+
+button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #2563eb;
+    color: white;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+.result-card {
+    margin-top: 30px;
+}
 
 .stats {
-
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 15px;
-    flex-wrap: wrap;
-
+    margin-bottom: 25px;
 }
-
 
 .card {
-
+    background: #f8fafc;
+    border-radius: 12px;
     padding: 15px;
-    border-radius: 10px;
-
+    text-align: center;
+    border: 1px solid #e5e7eb;
 }
-
 
 .card h3 {
-
     margin: 0;
-
+    font-size: 15px;
 }
-
 
 .card p {
-
+    margin-top: 10px;
     font-size: 24px;
+    font-weight: bold;
+}
 
+.details p {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+/* ---------- Quality Score ---------- */
+
+.quality-section {
+    margin-bottom: 25px;
+}
+
+.quality-section h3 {
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 18px;
+    background: #e5e7eb;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #2563eb;
+    transition: width 0.5s ease;
+}
+
+.score-text {
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.excellent {
+    background: #22c55e;
+}
+
+.good {
+    background: #f59e0b;
+}
+
+.poor {
+    background: #ef4444;
+}
+
+.summary-box {
+    background: #eff6ff;
+    border-left: 5px solid #2563eb;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.summary-box h3 {
+    margin-top: 0;
+}
+
+.summary-box p {
+    margin-bottom: 0;
+    line-height: 1.6;
 }
 
 
-.details {
 
-    margin-top: 20px;
-
-}v

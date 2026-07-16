@@ -14,6 +14,19 @@ function getPriorityBadge(priority) {
             return priority;
     }
 }
+function getScoreColor(score) {
+
+    if (score >= 90) {
+        return "excellent";
+    }
+
+    if (score >= 70) {
+        return "good";
+    }
+
+    return "poor";
+}
+
 
 analyzeBtn.addEventListener("click", async () => {
 
@@ -71,7 +84,32 @@ analyzeBtn.addEventListener("click", async () => {
 
                 <div class="details">
 
-                    <p><strong>Quality Score:</strong> ${data.qualityScore}/100</p>
+                    <div class="quality-section">
+
+                    <div class="summary-box">
+
+    <h3>💡 Summary</h3>
+
+    <p>${data.summary}</p>
+
+</div>
+
+
+
+    <h3>⭐ Quality Score</h3>
+
+    <div class="progress-bar">
+
+        <div
+    class="progress-fill ${getScoreColor(data.qualityScore)}"
+    style="width: ${data.qualityScore}%"
+></div>
+
+    </div>
+
+    <p class="score-text">${data.qualityScore}/100</p>
+
+</div>
 
                     <p><strong>Category:</strong> ${data.category}</p>
 

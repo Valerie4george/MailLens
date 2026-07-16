@@ -203,6 +203,29 @@ function detectPriority(category, isUrgent) {
     return "Medium";
 }
 
+function generateSummary(category, priority, isUrgent, mentionsAttachment) {
+
+    let summary = `This email is categorized as ${category}. `;
+
+    if (priority === "High") {
+        summary += "It is marked as HIGH priority. ";
+    } else if (priority === "Medium") {
+        summary += "It has MEDIUM priority. ";
+    } else {
+        summary += "It has LOW priority. ";
+    }
+
+    if (isUrgent) {
+        summary += "Urgent action may be required. ";
+    }
+
+    if (mentionsAttachment) {
+        summary += "An attachment is mentioned. ";
+    }
+
+    return summary;
+}
+
 
 function analyzeEmail(email) {
 
@@ -265,6 +288,13 @@ const category = categorizeEmail(email);
 
 const priority = detectPriority(category, isUrgent);
 
+const summary = generateSummary(
+    category,
+    priority,
+    isUrgent,
+    mentionsAttachment
+);
+
 
     return {
         wordCount,
@@ -280,7 +310,8 @@ const priority = detectPriority(category, isUrgent);
         mentionsAttachment,
         attachmentPhrase,
         category,
-        priority
+        priority,
+        summary
     };
 }
 
