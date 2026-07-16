@@ -111,29 +111,41 @@ analyzeBtn.addEventListener("click", async () => {
 
 </div>
 
-                    <p><strong>Category:</strong> ${data.category}</p>
+                    <div class="insights">
 
-                    <p><strong>Priority:</strong> ${getPriorityBadge(data.priority)}</p>
+<h3>📌 Insights</h3>
 
-                    <p><strong>Greeting:</strong> ${data.hasGreeting ? "Detected ✅" : "Not detected"}</p>
+<div class="insight-row">
+<span>🏷 Category</span>
+<span>${data.category}</span>
+</div>
 
-                    <p><strong>Sign-off:</strong> ${data.hasSignOff ? data.signOff : "Not detected"}</p>
+<div class="insight-row">
+<span>${getPriorityBadge(data.priority)}</span>
+<span>${data.priority}</span>
+</div>
 
-                    <p><strong>Urgent:</strong> ${data.isUrgent ? "Yes 🚨" : "No"}</p>
+<div class="insight-row">
+<span>🚨 Urgent</span>
+<span>${data.isUrgent ? "Yes" : "No"}</span>
+</div>
 
-                    <p><strong>Urgency Keywords:</strong> ${
-                        data.urgencyWords.length
-                            ? data.urgencyWords.join(", ")
-                            : "None"
-                    }</p>
+<div class="insight-row">
+<span>👋 Greeting</span>
+<span>${data.hasGreeting ? "Detected" : "Not detected"}</span>
+</div>
 
-                    <p><strong>Attachment:</strong> ${
-                        data.mentionsAttachment
-                            ? data.attachmentPhrase
-                            : "None"
-                    }</p>
+<div class="insight-row">
+<span>✍️ Sign-off</span>
+<span>${data.hasSignOff ? data.signOff : "Not detected"}</span>
+</div>
 
-                </div>
+<div class="insight-row">
+<span>📎 Attachment</span>
+<span>${data.mentionsAttachment ? data.attachmentPhrase : "None"}</span>
+</div>
+
+</div>
 
             </div>
         `;
