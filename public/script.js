@@ -2,6 +2,8 @@ const analyzeBtn = document.getElementById("analyzeBtn");
 const emailInput = document.getElementById("emailInput");
 const result = document.getElementById("result");
 
+const emailHistory = [];
+
 function getPriorityBadge(priority) {
     switch (priority) {
         case "High":
@@ -27,6 +29,42 @@ function getScoreColor(score) {
     return "poor";
 }
 
+function generateDashboard() {
+
+    const totalEmails = emailHistory.length;
+
+    let totalScore = 0;
+
+    const categories = {};
+
+    const priorities = {
+        High: 0,
+        Medium: 0,
+        Low: 0
+    };
+
+    for (const email of emailHistory) {
+
+        totalScore += email.qualityScore;
+
+        categories[email.category] =
+            (categories[email.category] || 0) + 1;
+
+        priorities[email.priority]++;
+    }
+
+    const averageScore =
+        Math.round(totalScore / totalEmails);
+
+    return {
+        totalEmails,
+        averageScore,
+        categories,
+        priorities
+    };
+
+}
+
 
 analyzeBtn.addEventListener("click", async () => {
 
@@ -50,6 +88,11 @@ analyzeBtn.addEventListener("click", async () => {
         });
 
         const data = await response.json();
+        emailHistory.push(data);
+        const dashboard = generateDashboard();
+
+console.log(emailHistory);
+console.log(dashboard);
 
         console.log("SERVER RESPONSE:", data);
 
@@ -93,8 +136,6 @@ analyzeBtn.addEventListener("click", async () => {
     <p>${data.summary}</p>
 
 </div>
-
-
 
     <h3>⭐ Quality Score</h3>
 
@@ -145,20 +186,51 @@ analyzeBtn.addEventListener("click", async () => {
 <span>${data.mentionsAttachment ? data.attachmentPhrase : "None"}</span>
 </div>
 
+            </div>
+
+            <hr>
+
+<div class="dashboard">
+
+<h2>📊 Analytics Dashboard</h2>
+
+<p><strong>Total Emails:</strong> ${dashboard.totalEmails}</p>
+
+<p><strong>Average Score:</strong> ${dashboard.averageScore}/100</p>
+
+<h3>Categories</h3>
+
+<ul>
+${Object.entries(dashboard.categories)
+.map(([category, count]) =>
+`<li>${category}: ${count}</li>`)
+.join("")}
+</ul>
+
+<h3>Priority Distribution</h3>
+
+<ul>
+<li>🔴 High: ${dashboard.priorities.High}</li>
+<li>🟡 Medium: ${dashboard.priorities.Medium}</li>
+<li>🟢 Low: ${dashboard.priorities.Low}</li>
+</ul>
+
 </div>
 
-            </div>
-        `;
+</div>
+</div>
 
+`;
     } catch (error) {
 
-        console.error(error);
+    console.error(error);
 
-        result.innerHTML = `
-            <p style="color:red;">
-                Something went wrong while analyzing the email.
-            </p>
-        `;
-    }
+    result.innerHTML = `
+        <p style="color:red;">
+            Something went wrong while analyzing the email.
+        </p>
+    `;
+
+}
 
 });

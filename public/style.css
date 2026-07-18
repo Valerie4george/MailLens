@@ -167,5 +167,25 @@ button:hover {
     border-bottom:none;
 }
 
+.dashboard {
+    margin-top: 40px;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.dashboard h2 {
+    margin-top: 0;
+}
+
+.dashboard ul {
+    padding-left: 20px;
+}
+
+.dashboard li {
+    margin: 8px 0;
+}
+
 
 
