@@ -5,10 +5,6 @@ const result = document.getElementById("result");
 const emailHistory = [];
 
 
-
-
-
-
 analyzeBtn.addEventListener("click", async () => {
 
     const email = emailInput.value.trim();
@@ -33,14 +29,21 @@ analyzeBtn.addEventListener("click", async () => {
         const data = await response.json();
         emailHistory.push(data);
         const dashboard = generateDashboard(emailHistory);
+        updateCategoryChart(dashboard);
+        updatePriorityChart(dashboard);
+
+       console.log("Before renderHistory");
+       renderHistory(emailHistory);
+       console.log("After renderHistory");
+
+        result.innerHTML = renderAnalysis(data);
+
 
 console.log(emailHistory);
 console.log(dashboard);
 
         console.log("SERVER RESPONSE:", data);
-
-        result.innerHTML = renderAnalysis(data);
-       
+    
     } catch (error) {
 
     console.error(error);

@@ -187,5 +187,22 @@ button:hover {
     margin: 8px 0;
 }
 
+.history-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 15px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    color: #333;
+}
+
+.history-card p {
+    margin: 6px 0;
+}
+
+#historyContainer {
+    margin-top: 20px;
+}
 
 

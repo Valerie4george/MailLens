@@ -91,3 +91,29 @@ function renderAnalysis(data) {
         </div>
     `;
 }
+
+function renderHistory(emailHistory) {
+
+    console.log("renderHistory called");
+
+    const historyContainer = document.getElementById("historyContainer");
+
+    if (!historyContainer) return;
+
+    if (emailHistory.length === 0) {
+        historyContainer.innerHTML = "<p>No emails analyzed yet.</p>";
+        return;
+    }
+emailHistory.forEach((email, index) => {
+    historyContainer.innerHTML += `
+    <div class="history-card">
+        <strong>Analysis #${index + 1}</strong>
+
+        <p><strong>Category:</strong> ${email.category}</p>
+        <p><strong>Priority:</strong> ${email.priority}</p>
+        <p><strong>Quality Score:</strong> ${email.qualityScore}</p>
+    </div>
+`;
+});
+
+}
